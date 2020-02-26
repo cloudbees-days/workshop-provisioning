@@ -136,6 +136,7 @@ OperationsCenter:
     Annotations:
       kubernetes.io/ingress.class: nginx
       kubernetes.io/tls-acme: 'true'
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
 
     tls:
       ## Set this to true in order to enable TLS on the ingress record

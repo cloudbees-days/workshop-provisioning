@@ -8,6 +8,6 @@ helm upgrade --install cloudbees-core cloudbees/cloudbees-core \
   --namespace='cloudbees-core'
 
 
-CORE_PASSWORD=$(kubectl exec cjoc-0 -- sh -c "until cat /var/jenkins_home/secrets/initialAdminPassword 2>&-; do sleep 5; done")
+CORE_PASSWORD=$(kubectl -n cloudbees-core exec cjoc-0 -- sh -c "until cat /var/jenkins_home/secrets/initialAdminPassword 2>&-; do sleep 5; done")
 
-echo '#### Core password: '$CORE_PASSWORD'####'
+echo '#### Core password: '$CORE_PASSWORD' ####'
