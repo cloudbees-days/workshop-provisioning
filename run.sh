@@ -21,4 +21,8 @@ mkdir run
 # Install cert-manager
 . ./scripts/cert-manager.sh
 
+# Setting up DNS records
 . ./scripts/dns.sh
+
+# Install Core
+. ./scripts/core.sh
