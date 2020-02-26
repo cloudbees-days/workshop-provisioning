@@ -37,7 +37,7 @@ OperationsCenter:
 
   # Platform enables specific settings, option defaults standard
   # platform specific values are: eks, aws, gke, aks, pks, openshift
-  Platform: standard
+  Platform: gke
 
   # The hostname used to access Operations Center through the ingress controller.
   HostName: null
@@ -46,7 +46,7 @@ OperationsCenter:
   ContextPath: /cjoc
 
   # Protocol used to access CJOC. Possible values are http/https.
-  Protocol: http
+  Protocol: https
   # Protocol: https
 
   # CPU limit to run Operations Center
@@ -135,12 +135,12 @@ OperationsCenter:
     # Annotations to put on Ingress object
     Annotations:
       kubernetes.io/ingress.class: nginx
-      kubernetes.io/tls-acme: 'false'
+      kubernetes.io/tls-acme: 'true'
 
     tls:
       ## Set this to true in order to enable TLS on the ingress record
-      Enable: false
-      SecretName: cloudbees-core-example-com-tls
+      Enable: true
+      SecretName: core-tls
       Host: jenkins.cluster.local
 
   # OpenShift uses a Route instead of an Ingress, this section is added to match the opensource Jenkins Chart
@@ -248,7 +248,7 @@ Persistence:
 
 # Master hibernation
 Hibernation:
-  Enabled: false
+  Enabled: true
   Image:
     dockerImage: cloudbees/managed-master-hibernation-monitor:207.59ac576f66d8
     dockerPullPolicy: IfNotPresent

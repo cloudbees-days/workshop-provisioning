@@ -26,3 +26,6 @@ mkdir run
 
 # Install Core
 . ./scripts/core.sh
+
+# Install Flow
+. ./scripts/flow.sh
