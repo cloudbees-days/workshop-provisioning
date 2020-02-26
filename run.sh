@@ -11,3 +11,14 @@ mkdir run
 
 # Provision a GKE cluster
 . ./scripts/gke.sh
+
+# Initialize Helm
+. ./scripts/helm.sh
+
+# Install nginx ingress controller
+. ./scripts/nginx.sh
+
+# Install cert-manager
+. ./scripts/cert-manager.sh
+
+. ./scripts/dns.sh
