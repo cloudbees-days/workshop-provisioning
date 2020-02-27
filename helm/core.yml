@@ -35,10 +35,6 @@ OperationsCenter:
     dockerImage: cloudbees/cloudbees-cloud-core-oc:2.204.2.2
     dockerPullPolicy: Always
 
-  # Platform enables specific settings, option defaults standard
-  # platform specific values are: eks, aws, gke, aks, pks, openshift
-  Platform: gke
-
   # The hostname used to access Operations Center through the ingress controller.
   HostName: null
 
@@ -136,7 +132,7 @@ OperationsCenter:
     Annotations:
       kubernetes.io/ingress.class: nginx
       kubernetes.io/tls-acme: 'true'
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      cert-manager.io/cluster-issuer: "letsencrypt-staging"
 
     tls:
       ## Set this to true in order to enable TLS on the ingress record

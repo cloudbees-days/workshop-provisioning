@@ -29,3 +29,6 @@ mkdir run
 
 # Install Flow
 . ./scripts/flow.sh
+
+# # Install Nexus
+# . ./scripts/nexus.sh

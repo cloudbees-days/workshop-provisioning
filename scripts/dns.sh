@@ -3,6 +3,13 @@ echo '----> Setting up DNS records'
 rm -f transaction.yaml
 INGRESS_IP=$(kubectl get -n ingress-nginx svc | grep nginx-ingress-controller | awk '{print $4}')
 
+while [[ ! $INGRESS_IP =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]
+do
+  sleep 5
+  echo "waiting 5"
+  INGRESS_IP=$(kubectl get -n ingress-nginx svc | grep nginx-ingress-controller | awk '{print $4}')
+done
+
 gcloud config set project $DNS_PROJECT
 
 # Grab the current IP address of the DNS record

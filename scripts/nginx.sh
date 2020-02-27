@@ -5,6 +5,5 @@ helm upgrade --install \
   nginx-ingress stable/nginx-ingress \
   --values ./helm/nginx.yml \
   --version 1.4.0 \
+  --wait \
   --namespace ingress-nginx
-
-sleep 30
