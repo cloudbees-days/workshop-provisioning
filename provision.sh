@@ -32,3 +32,6 @@ mkdir run
 
 # Install Nexus
 . ./scripts/nexus.sh
+
+# Install keycloak
+. ./scripts/keycloak.sh

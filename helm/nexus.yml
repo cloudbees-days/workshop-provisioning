@@ -35,7 +35,7 @@ nexus:
   dockerPort: 5003
   nexusPort: 8081
   service:
-    type: NodePort
+    type: ClusterIP
     # clusterIP: None
   # annotations: {}
     ## When using LoadBalancer service type, use the following AWS certificate from ACM
@@ -155,9 +155,12 @@ serviceAccount:
   annotations: {}
 
 ingress:
-  enabled: false
+  enabled: true
   path: /
-  annotations: {}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10G"
   # # NOTE: Can't use 'false' due to https://github.com/jetstack/kube-lego/issues/173.
   # kubernetes.io/ingress.allow-http: true
   # kubernetes.io/ingress.class: gce
@@ -214,10 +217,10 @@ secret:
 # # To use an additional service, set enable to true
 service:
   # name: additional-svc
-  enabled: false
+  enabled: true
   labels: {}
   annotations: {}
   ports:
   - name: nexus-service
-    targetPort: 80
-    port: 80
+    targetPort: 5003
+    port: 5003

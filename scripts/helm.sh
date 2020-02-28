@@ -8,6 +8,7 @@ kubectl create clusterrolebinding tiller \
 echo '----> Initializing Helm'
 helm init --wait --service-account tiller
 helm repo add cloudbees https://charts.cloudbees.com/public/cloudbees
+helm repo add codecentric https://codecentric.github.io/helm-charts
 helm repo update
 
 sleep 5
