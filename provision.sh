@@ -12,6 +12,9 @@ mkdir run
 # Provision a GKE cluster
 . ./scripts/gke.sh
 
+# Provision FreeIPA
+. ./scripts/freeipa.sh
+
 # Initialize Helm
 . ./scripts/helm.sh
 
@@ -32,6 +35,3 @@ mkdir run
 
 # Install Nexus
 . ./scripts/nexus.sh
-
-# Install keycloak
-. ./scripts/keycloak.sh
