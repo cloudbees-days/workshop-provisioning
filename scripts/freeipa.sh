@@ -87,13 +87,3 @@ fi
 gcloud config set project $CLUSTER_PROJECT
 
 echo "----> Setting up FreeIPA"
-sshe sudo mkdir /var/lib/ipa-data
-sshe sudo setsebool -P container_manage_cgroup 1
-sshe docker run --name freeipa-server-container -ti \
-    -h $FREEIPA_HOSTNAME \
-    -e PASSWORD=changeme \
-    -e IPA_SERVER_IP=$VM_IP \
-    -p 53:53/udp -p 53:53 \
-    -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 \
-    -p 88:88/udp -p 464:464/udp -p 123:123/udp \
-    -v /var/lib/ipa-data:/data:Z -d freeipa/freeipa-server ipa-server-install
