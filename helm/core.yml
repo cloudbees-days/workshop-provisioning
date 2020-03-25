@@ -32,7 +32,7 @@ OperationsCenter:
 
   # Operations Center docker image
   Image:
-    dockerImage: cloudbees/cloudbees-cloud-core-oc:2.204.2.2
+    dockerImage: gcr.io/cb-days-workshop/cb-core-oc-workshop@sha256:588000c6e2c87ad4041f7a2ba6dd0edf57f1253c1785ff544fb5ae28e371b392
     dockerPullPolicy: Always
 
   # The hostname used to access Operations Center through the ingress controller.
@@ -47,11 +47,11 @@ OperationsCenter:
 
   # CPU limit to run Operations Center
   # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu
-  Cpu: '1'
+  Cpu: '2'
 
   # Memory limit to run Operations Center
   # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory
-  Memory: 2G
+  Memory: 6G
 
   # Environment variables that get added to the container (useful for e.g. http_proxy)
   # ContainerEnv:
@@ -59,10 +59,8 @@ OperationsCenter:
   #     value: "http://192.168.64.1:3128"
 
   # Additional java options to pass to the Operations Center
-  # JavaOpts: ""
-  #   -Dcom.sun.management.jmxremote.port=4000
-  #   -Dcom.sun.management.jmxremote.authenticate=false
-  #   -Dcom.sun.management.jmxremote.ssl=false
+  JavaOpts: ""
+    -Dcom.cloudbees.opscenter.clouds.kubernetes.KubernetesConfiguration.autoconfigure=false
 
   # Container port where JMX is exposed
   # JMXPort: 4000
@@ -198,7 +196,7 @@ Master:
 
   # Docker image inserted in Operations Center automatically
   Image:
-    dockerImage: cloudbees/cloudbees-core-mm:2.204.2.2
+    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:0233fa0ebe0445afe81324640f258b73a7fd63fc795f19195fb9c83790d97c70
     dockerPullPolicy: Always
   # Additional Java options to pass to managed masters. For example, setting up a JMX port
   JavaOpts: null
