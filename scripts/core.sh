@@ -15,12 +15,3 @@ helm upgrade --install cloudbees-core cloudbees/cloudbees-core \
 CORE_PASSWORD=$(kubectl -n cloudbees-core exec cjoc-0 -- sh -c "until cat /var/jenkins_home/secrets/initialAdminPassword 2>&-; do sleep 5; done")
 
 echo '#### Core password: '$CORE_PASSWORD' ####'
-
-# while [[ $(curl --write-out %{http_code} --silent --output /dev/null -k https://$CORE_HOSTNAME/cjoc/login) -ne 200 ]]; do
-#   echo "Waiting for Core to become available"
-#   sleep 5
-# done
-
-# cd robot
-# node setup_core.js --secret $CORE_PASSWORD --username ldonley --password changeme --email ldonley@cloudbees.com --url https://$CORE_HOSTNAME/cjoc/
-# cd ..
