@@ -32,7 +32,8 @@ OperationsCenter:
 
   # Operations Center docker image
   Image:
-    dockerImage: cloudbees/cloudbees-cloud-core-oc:2.204.2.2
+    # dockerImage: cloudbees/cloudbees-cloud-core-oc:2.204.2.2
+    dockerImage: gcr.io/cb-days-workshop/cb-core-oc-workshop@sha256:e4f38afe8cc5c1881776843fae72e9b642e6cdd34b7c91f561adbdfdf8a5f77d
     dockerPullPolicy: Always
 
   # The hostname used to access Operations Center through the ingress controller.
@@ -198,7 +199,8 @@ Master:
 
   # Docker image inserted in Operations Center automatically
   Image:
-    dockerImage: cloudbees/cloudbees-core-mm:2.204.2.2
+    # dockerImage: cloudbees/cloudbees-core-mm:2.204.2.2
+    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:e13620df3548e79838bb487424a6161debafbcc3e866d3bf5a231f16d2956f8a
     dockerPullPolicy: Always
   # Additional Java options to pass to managed masters. For example, setting up a JMX port
   JavaOpts: null
