@@ -59,8 +59,8 @@ OperationsCenter:
   #     value: "http://192.168.64.1:3128"
 
   # Additional java options to pass to the Operations Center
-  JavaOpts: ""
-    -Dcom.cloudbees.opscenter.clouds.kubernetes.KubernetesConfiguration.autoconfigure=false
+  # JavaOpts: ""
+  #   -Dcom.cloudbees.opscenter.clouds.kubernetes.KubernetesConfiguration.autoconfigure=false
 
   # Container port where JMX is exposed
   # JMXPort: 4000
