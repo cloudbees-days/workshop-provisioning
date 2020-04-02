@@ -203,7 +203,8 @@ Master:
     dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:e13620df3548e79838bb487424a6161debafbcc3e866d3bf5a231f16d2956f8a
     dockerPullPolicy: Always
   # Additional Java options to pass to managed masters. For example, setting up a JMX port
-  JavaOpts: null
+  JavaOpts: ""
+    -Dcom.cloudbees.opscenter.client.casc.ConfigurationUpdaterTask.recurrencePeriod=2
 
 # Agent options
 Agents:
