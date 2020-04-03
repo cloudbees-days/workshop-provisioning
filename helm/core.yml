@@ -33,7 +33,7 @@ OperationsCenter:
   # Operations Center docker image
   Image:
     # dockerImage: cloudbees/cloudbees-cloud-core-oc:2.204.2.2
-    dockerImage: gcr.io/cb-days-workshop/cb-core-oc-workshop@sha256:e4f38afe8cc5c1881776843fae72e9b642e6cdd34b7c91f561adbdfdf8a5f77d
+    dockerImage: gcr.io/cb-days-workshop/cb-core-oc-workshop@sha256:8b4547b73ad5aaaa9f77ab5de64b029df7a337a8b6e8fc62bf1e9c01d45ba913
     dockerPullPolicy: Always
 
   # The hostname used to access Operations Center through the ingress controller.
@@ -200,10 +200,11 @@ Master:
   # Docker image inserted in Operations Center automatically
   Image:
     # dockerImage: cloudbees/cloudbees-core-mm:2.204.2.2
-    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:e13620df3548e79838bb487424a6161debafbcc3e866d3bf5a231f16d2956f8a
+    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:0ddbe7f583f628e37d510882a23f52396d5aacc5345c9d479e4c2b673d99a6f7
     dockerPullPolicy: Always
   # Additional Java options to pass to managed masters. For example, setting up a JMX port
-  JavaOpts: null
+  JavaOpts:
+    -Dcom.cloudbees.opscenter.client.casc.ConfigurationUpdaterTask.recurrencePeriod=2
 
 # Agent options
 Agents:

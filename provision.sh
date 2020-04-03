@@ -13,25 +13,22 @@ mkdir run
 . ./scripts/gke.sh
 
 # Provision FreeIPA
-. ./scripts/freeipa.sh
+# . ./scripts/freeipa.sh
 
-# Initialize Helm
-. ./scripts/helm.sh
-
-# Install nginx ingress controller
+Install nginx ingress controller
 . ./scripts/nginx.sh
 
-# Install cert-manager
+Install cert-manager
 . ./scripts/cert-manager.sh
 
-# Setting up DNS records
+Setting up DNS records
 . ./scripts/dns.sh
 
 # Install Core
 . ./scripts/core.sh
 
-# Install Flow
+Install Flow
 . ./scripts/flow.sh
 
-# Install Nexus
+Install Nexus
 . ./scripts/nexus.sh
