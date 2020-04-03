@@ -1,7 +1,7 @@
 echo '----> Provisioning GKE cluster'
 gcloud beta container clusters create $CLUSTER_NAME \
---cluster-version=1.14.10-gke.17 \
---machine-type=n2-standard-4 \
+--cluster-version=$CLUSTER_VERSION \
+--machine-type=$MACHINE_TYPE \
 --num-nodes=2 \
 --region=$REGION \
 --verbosity=none \
