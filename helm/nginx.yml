@@ -6,3 +6,5 @@ controller:
   ingressClass: "nginx"
   service:
     externalTrafficPolicy: "Local"
+tcp:
+  50000: "cloudbees-core/cjoc:50000"
