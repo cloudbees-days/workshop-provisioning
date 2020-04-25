@@ -204,7 +204,7 @@ Master:
     dockerPullPolicy: Always
   # Additional Java options to pass to managed masters. For example, setting up a JMX port
   JavaOpts:
-    -Dcom.cloudbees.opscenter.client.casc.ConfigurationUpdaterTask.recurrencePeriod=2
+    -Dcom.cloudbees.opscenter.client.casc.ConfigurationUpdaterTask.recurrencePeriod=1
 
 # Agent options
 Agents:
