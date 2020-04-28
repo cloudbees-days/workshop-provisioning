@@ -48,11 +48,11 @@ OperationsCenter:
 
   # CPU limit to run Operations Center
   # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu
-  Cpu: '1'
+  Cpu: '2'
 
   # Memory limit to run Operations Center
   # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory
-  Memory: 2G
+  Memory: 8G
 
   # Environment variables that get added to the container (useful for e.g. http_proxy)
   # ContainerEnv:
@@ -200,7 +200,7 @@ Master:
   # Docker image inserted in Operations Center automatically
   Image:
     # dockerImage: cloudbees/cloudbees-core-mm:2.204.2.2
-    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:0ddbe7f583f628e37d510882a23f52396d5aacc5345c9d479e4c2b673d99a6f7
+    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:3a67a3b4050a3e125c9d40529fcf889f6af49fb50a3de09a165ea860859b51c9
     dockerPullPolicy: Always
   # Additional Java options to pass to managed masters. For example, setting up a JMX port
   JavaOpts:
