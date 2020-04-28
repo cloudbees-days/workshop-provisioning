@@ -99,13 +99,26 @@ resource "helm_release" "flow" {
   ]
 }
 
-resource "helm_release" "nexus" {
-  name      = "nexus"
-  chart     = "stable/sonatype-nexus"
-  namespace = "nexus"
+# resource "helm_release" "nexus" {
+#   name      = "nexus"
+#   chart     = "stable/sonatype-nexus"
+#   namespace = "nexus"
 
-  values = [
-    "${file("./../../helm/nexus.yml")}"
-  ]
+#   values = [
+#     "${file("./../../helm/nexus.yml")}"
+#   ]
+# }
+
+data "kubernetes_service" "nginx-ingress-controller" {
+  metadata {
+    name      = "ingress-nginx-nginx-ingress-controller"
+    namespace = "ingress-nginx"
+  }
 }
+
+
+output "nginx-ingress-controller-ip" {
+  value = "${data.kubernetes_service.nginx-ingress-controller.spec}"
+}
+
 
