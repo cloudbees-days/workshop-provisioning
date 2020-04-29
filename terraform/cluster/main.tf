@@ -1,11 +1,38 @@
+variable "project" {
+  type = string
+}
+
+variable "domain" {
+  type = string
+}
+
+variable "domain_zone" {
+  type = string
+}
+
+variable "region" {
+  type = string
+}
+
+variable "cluster_name" {
+  type = string
+}
+
+terraform {
+  backend "gcs" {
+    bucket  = "ld-cluster-state"
+    prefix  = "terraform/state/cluster"
+  }
+}
+
 provider "google" {
-  project = "ldonley"
-  region  = "us-central1"
+  project = var.project
+  region  = var.region
 }
 
 provider "google-beta" {
-  project = "ldonley"
-  region  = "us-central1"
+  project = var.project
+  region  = var.region
 }
 
 resource "random_id" "username" {
@@ -18,13 +45,13 @@ resource "random_id" "password" {
 
 resource "google_container_cluster" "primary" {
   provider                 = google-beta
-  name                     = "logan-cluster"
+  name                     = var.cluster_name
   location                 = "us-central1-a"
   remove_default_node_pool = true
   initial_node_count       = 1
 
   workload_identity_config {
-    identity_namespace = "ldonley.svc.id.goog"
+    identity_namespace = "${var.project}.svc.id.goog"
   }
 
   master_auth {

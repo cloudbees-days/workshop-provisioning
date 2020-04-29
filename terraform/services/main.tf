@@ -1,3 +1,14 @@
+variable "domain" {
+  type = string
+}
+
+terraform {
+  backend "gcs" {
+    bucket  = "ld-cluster-state"
+    prefix  = "terraform/state/services"
+  }
+}
+
 provider "kubernetes" {
   config_path = "${path.module}/../kubeconfig"
 }
@@ -32,15 +43,6 @@ resource "kubernetes_namespace" "cloudbees-core" {
   }
 }
 
-resource "kubernetes_namespace" "flow" {
-  metadata {
-    name = "flow"
-
-    labels = {
-      app = "flow"
-    }
-  }
-}
 
 resource "kubernetes_namespace" "nexus" {
   metadata {
@@ -87,16 +89,21 @@ resource "helm_release" "core" {
   values = [
     "${file("./../../helm/core.yml")}"
   ]
-}
 
-resource "helm_release" "flow" {
-  name      = "flow"
-  chart     = "cloudbees/cloudbees-flow"
-  namespace = "flow"
+  set {
+    name  = "OperationsCenter.HostName"
+    value = "core.${var.domain}"
+  }
 
-  values = [
-    "${file("./../../helm/flow.yml")}"
-  ]
+  set {
+    name  = "nginx-ingress.Enabled"
+    value = "false"
+  }
+
+  set {
+    name  = "OperationsCenter.Ingress.tls.Host"
+    value = "core.${var.domain}"
+  }
 }
 
 # resource "helm_release" "nexus" {
@@ -108,17 +115,5 @@ resource "helm_release" "flow" {
 #     "${file("./../../helm/nexus.yml")}"
 #   ]
 # }
-
-data "kubernetes_service" "nginx-ingress-controller" {
-  metadata {
-    name      = "ingress-nginx-nginx-ingress-controller"
-    namespace = "ingress-nginx"
-  }
-}
-
-
-output "nginx-ingress-controller-ip" {
-  value = "${data.kubernetes_service.nginx-ingress-controller.spec}"
-}
 
 
