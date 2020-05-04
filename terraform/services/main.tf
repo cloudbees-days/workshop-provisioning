@@ -150,16 +150,16 @@ resource "helm_release" "nginx-ingress" {
   ]
 }
 
-resource "helm_release" "cert-manager" {
-  name       = "cert-manager"
-  repository = data.helm_repository.jetstack.metadata[0].name
-  chart      = "jetstack/cert-manager"
-  namespace  = "cert-manager"
+# resource "helm_release" "cert-manager" {
+#   name       = "cert-manager"
+#   repository = data.helm_repository.jetstack.metadata[0].name
+#   chart      = "jetstack/cert-manager"
+#   namespace  = "cert-manager"
 
-  values = [
-    "${file("./../../helm/cert-manager.yml")}"
-  ]
-}
+#   values = [
+#     "${file("./../../helm/cert-manager.yml")}"
+#   ]
+# }
 
 resource "helm_release" "core" {
   name       = "core"
