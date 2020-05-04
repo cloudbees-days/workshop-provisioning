@@ -212,6 +212,8 @@ resource "kubernetes_secret" "postgresdb" {
     POSTGRES_USER     = random_string.db_username.result
     POSTGRES_PASSWORD = random_string.db_password.result
     POSTGRES_DB       = random_string.db_name.result
+    POSTGRES_PORT     = 5432
+    POSTGRES_SERVICE  = kubernetes_service.postgresdb.metadata[0].name
   }
 }
 
@@ -303,6 +305,7 @@ resource "kubernetes_deployment" "microblog-backend" {
         container {
           image = "gcr.io/cb-days-workshop/microblog-backend"
           name  = "microblog-backend"
+          image_pull_policy = "Always"
         }
       }
     }
