@@ -90,56 +90,6 @@ data "helm_repository" "jetstack" {
   url  = "https://charts.jetstack.io"
 }
 
-resource "kubernetes_role" "cjoc-agents" {
-  metadata {
-    name      = "cjoc-agents"
-    namespace = "cloudbees-core"
-  }
-
-  rule {
-    api_groups = [""]
-    resources  = ["pods"]
-    verbs      = ["create", "delete", "get", "list", "patch", "update", "watch"]
-  }
-  rule {
-    api_groups = [""]
-    resources  = ["pods/exec"]
-    verbs      = ["create", "delete", "get", "list", "patch", "update", "watch"]
-  }
-  rule {
-    api_groups = [""]
-    resources  = ["deployments"]
-    verbs      = ["get", "list", "watch"]
-  }
-  rule {
-    api_groups = ["apps"]
-    resources  = ["deployments"]
-    verbs      = ["create", "delete", "get", "list", "patch", "update", "watch"]
-  }
-  rule {
-    api_groups = [""]
-    resources  = ["services"]
-    verbs      = ["create", "delete", "get", "list", "patch", "update", "watch"]
-  }
-  rule {
-    api_groups = [""]
-    resources  = ["secrets"]
-    verbs      = ["create", "delete", "get", "list", "patch", "update", "watch"]
-  }
-  rule {
-    api_groups = [""]
-    resources  = ["persistentvolumeclaims"]
-    verbs      = ["create", "delete", "get", "list", "patch", "update", "watch"]
-  }
-  rule {
-    api_groups = ["extensions"]
-    resources  = ["ingresses"]
-    verbs      = ["create", "delete", "get", "list", "patch", "update", "watch"]
-  }
-  
-  depends_on = [helm_release.core]
-}
-
 resource "helm_release" "nginx-ingress" {
   name       = "ingress-nginx"
   repository = data.helm_repository.stable.metadata[0].name
