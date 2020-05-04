@@ -312,6 +312,11 @@ resource "kubernetes_deployment" "microblog-backend" {
             }
           }
         }
+        init_container {
+          name = "db-migration"
+          image = "gcr.io/cb-days-workshop/microblog-backend"
+          command = ["python manage.py migrate"]
+        }
       }
     }
   }
