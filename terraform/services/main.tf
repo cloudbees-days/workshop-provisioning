@@ -190,6 +190,7 @@ resource "helm_release" "core" {
 resource "kubernetes_persistent_volume_claim" "postgresdb" {
   metadata {
     name = "postgresdb"
+    namespace = "cloudbees-core"
   }
   spec {
     access_modes = ["ReadWriteOnce"]
@@ -204,6 +205,7 @@ resource "kubernetes_persistent_volume_claim" "postgresdb" {
 resource "kubernetes_secret" "postgresdb" {
   metadata {
     name = "postgresdb"
+    namespace = "cloudbees-core"
   }
 
   data = {
@@ -217,6 +219,7 @@ resource "kubernetes_secret" "postgresdb" {
 resource "kubernetes_deployment" "postgresdb" {
   metadata {
     name = "postgresdb"
+    namespace = "cloudbees-core"
     labels = {
       app = "postgresdb"
     }
@@ -274,6 +277,7 @@ resource "kubernetes_service" "postgresdb" {
 resource "kubernetes_deployment" "microblog-backend" {
   metadata {
     name = "microblog-backend"
+    namespace = "cloudbees-core"
     labels = {
       app = "microblog-backend"
     }
