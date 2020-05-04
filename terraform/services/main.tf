@@ -333,6 +333,7 @@ resource "kubernetes_ingress" "microblog-backend" {
     namespace = "cloudbees-core"
     annotations = {
       "kubernetes.io/ingress.class" = "nginx"
+      "cert-manager.io/cluster-issuer": "letsencrypt-prod"
     }
   }
 
@@ -348,10 +349,12 @@ resource "kubernetes_ingress" "microblog-backend" {
           path = "/"
         }
       }
+      host = "backend.${var.domain}"
     }
 
     tls {
       secret_name = "backend-tls"
+      hosts = ["backend.${var.domain}"]
     }
   }
 }
