@@ -316,6 +316,11 @@ resource "kubernetes_deployment" "microblog-backend" {
           name = "db-migration"
           image = "gcr.io/cb-days-workshop/microblog-backend"
           command = ["sh", "-c", "python manage.py migrate"]
+          env_from {
+            secret_ref {
+              name = "postgresdb"
+            }
+          }
         }
       }
     }
