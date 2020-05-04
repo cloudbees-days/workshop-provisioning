@@ -306,6 +306,11 @@ resource "kubernetes_deployment" "microblog-backend" {
           image = "gcr.io/cb-days-workshop/microblog-backend"
           name  = "microblog-backend"
           image_pull_policy = "Always"
+          env_from {
+            secret_ref {
+              name = "postgresdb"
+            }
+          }
         }
       }
     }
