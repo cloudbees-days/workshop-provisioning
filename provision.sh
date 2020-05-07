@@ -7,28 +7,28 @@ echo '----> Provisioning cluster '$CLUSTER_NAME' in region '$REGION' in project 
 gcloud config set project $CLUSTER_PROJECT
 
 # Making runtime directory for storing artifacts - toggle with $SAVE_RUN environment variable
-mkdir run
+# mkdir run
 
-# Provision a GKE cluster
+# # Provision a GKE cluster
 . ./scripts/gke.sh
 
-# Provision FreeIPA
+# # Provision FreeIPA
 # . ./scripts/freeipa.sh
 
-Install nginx ingress controller
+# # Install nginx ingress controller
 . ./scripts/nginx.sh
 
-Install cert-manager
+# # Install cert-manager
 . ./scripts/cert-manager.sh
 
-Setting up DNS records
+# # Setting up DNS records
 . ./scripts/dns.sh
 
 # Install Core
 . ./scripts/core.sh
 
-Install Flow
+# Install Flow
 . ./scripts/flow.sh
 
-Install Nexus
+# Install Nexus
 . ./scripts/nexus.sh

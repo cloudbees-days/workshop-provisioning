@@ -6,3 +6,7 @@ controller:
   ingressClass: "nginx"
   service:
     externalTrafficPolicy: "Local"
+  extraArgs:
+    default-ssl-certificate: "cloudbees-core/core-tls"
+tcp:
+  50000: "cloudbees-core/cjoc:50000"
