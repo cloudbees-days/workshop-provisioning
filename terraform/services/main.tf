@@ -75,24 +75,10 @@ provider "helm" {
   }
 }
 
-data "helm_repository" "stable" {
-  name = "stable"
-  url  = "https://kubernetes-charts.storage.googleapis.com"
-}
-
-data "helm_repository" "cloudbees" {
-  name = "cloudbees"
-  url  = "https://charts.cloudbees.com/public/cloudbees"
-}
-
-data "helm_repository" "jetstack" {
-  name = "jetstack"
-  url  = "https://charts.jetstack.io"
-}
 
 resource "helm_release" "nginx-ingress" {
   name       = "ingress-nginx"
-  repository = data.helm_repository.stable.metadata[0].name
+  repository = "https://kubernetes-charts.storage.googleapis.com"
   chart      = "stable/nginx-ingress"
   namespace  = "ingress-nginx"
   version    = "1.4.0"
@@ -115,7 +101,7 @@ resource "helm_release" "nginx-ingress" {
 
 resource "helm_release" "core" {
   name       = "core"
-  repository = data.helm_repository.cloudbees.metadata[0].name
+  repository = "https://charts.cloudbees.com/public/cloudbees"
   chart      = "cloudbees/cloudbees-core"
   namespace  = "cloudbees-core"
 

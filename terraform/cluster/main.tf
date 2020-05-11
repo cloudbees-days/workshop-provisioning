@@ -2,14 +2,6 @@ variable "project" {
   type = string
 }
 
-variable "domain" {
-  type = string
-}
-
-variable "domain_zone" {
-  type = string
-}
-
 variable "region" {
   type = string
 }
@@ -73,7 +65,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
   node_config {
     preemptible  = false
-    machine_type = "n2-standard-4"
+    machine_type = "n1-standard-8"
 
     metadata = {
       disable-legacy-endpoints = "true"

@@ -7,6 +7,7 @@ pipeline {
       TF_VAR_domain = credentials('cbws-domain')
       TF_VAR_region = credentials('cbws-region')
       TF_VAR_cluster_name = credentials('cbws-cluster-name')
+      EMAIL = credentials('cbws-email')
    }
    stages {
       stage('Setup cluster') {
@@ -15,14 +16,34 @@ pipeline {
                sh 'terraform init'
                sh 'terraform apply -auto-approve'
             }
+         }
+      }
+      stage('Setup services') {
+         steps {
             dir('terraform/services') {
                sh 'terraform init'
                sh 'terraform apply -auto-approve'
             }
+         }
+      }
+      stage('Setup DNS') {
+         steps {
             dir('terraform/dns') {
                sh 'terraform init'
                sh 'terraform apply -auto-approve'
             }
+         }
+      }
+      stage('Setup extra') {
+         steps {
+            sh '''
+               export KUBECONFIG=terraform/kubeconfig
+               kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.3/cert-manager-legacy.yaml
+               sleep 30
+               sed -i.bak 's/REPLACE_EMAIL/'$EMAIL'/' ./k8s/cluster-issuers.yml
+               kubectl apply -f k8s/cluster-issuers.yml
+               kubectl apply -f k8s/cjoc-agents.yaml -n cloudbees-core
+            '''
          }
       }
    }
