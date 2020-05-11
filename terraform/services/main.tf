@@ -79,7 +79,7 @@ provider "helm" {
 resource "helm_release" "nginx-ingress" {
   name       = "ingress-nginx"
   repository = "https://kubernetes-charts.storage.googleapis.com"
-  chart      = "stable/nginx-ingress"
+  chart      = "nginx-ingress"
   namespace  = "ingress-nginx"
   version    = "1.4.0"
 
@@ -102,7 +102,7 @@ resource "helm_release" "nginx-ingress" {
 resource "helm_release" "core" {
   name       = "core"
   repository = "https://charts.cloudbees.com/public/cloudbees"
-  chart      = "cloudbees/cloudbees-core"
+  chart      = "cloudbees-core"
   namespace  = "cloudbees-core"
 
   values = [
