@@ -81,7 +81,6 @@ resource "helm_release" "nginx-ingress" {
   repository = "https://kubernetes-charts.storage.googleapis.com"
   chart      = "nginx-ingress"
   namespace  = "ingress-nginx"
-  version    = "1.4.0"
 
   values = [
     "${file("./../../helm/nginx.yml")}"
@@ -127,7 +126,7 @@ resource "helm_release" "core" {
 
 resource "kubernetes_persistent_volume_claim" "postgresdb" {
   metadata {
-    name = "postgresdb"
+    name      = "postgresdb"
     namespace = "cloudbees-core"
   }
   spec {
@@ -142,7 +141,7 @@ resource "kubernetes_persistent_volume_claim" "postgresdb" {
 
 resource "kubernetes_secret" "postgresdb" {
   metadata {
-    name = "postgresdb"
+    name      = "postgresdb"
     namespace = "cloudbees-core"
   }
 
@@ -158,13 +157,13 @@ resource "kubernetes_secret" "postgresdb" {
 
 resource "kubernetes_deployment" "postgresdb" {
   metadata {
-    name = "postgresdb"
+    name      = "postgresdb"
     namespace = "cloudbees-core"
     labels = {
       app = "postgresdb"
     }
   }
-  
+
 
   spec {
     replicas = 1
@@ -221,7 +220,7 @@ resource "kubernetes_service" "postgresdb" {
 
 resource "kubernetes_deployment" "microblog-backend" {
   metadata {
-    name = "microblog-backend"
+    name      = "microblog-backend"
     namespace = "cloudbees-core"
     labels = {
       app = "microblog-backend"
@@ -246,8 +245,8 @@ resource "kubernetes_deployment" "microblog-backend" {
 
       spec {
         container {
-          image = "gcr.io/cb-days-workshop/microblog-backend"
-          name  = "microblog-backend"
+          image             = "gcr.io/cb-days-workshop/microblog-backend"
+          name              = "microblog-backend"
           image_pull_policy = "Always"
           env_from {
             secret_ref {
@@ -256,8 +255,8 @@ resource "kubernetes_deployment" "microblog-backend" {
           }
         }
         init_container {
-          name = "db-migration"
-          image = "gcr.io/cb-days-workshop/microblog-backend"
+          name    = "db-migration"
+          image   = "gcr.io/cb-days-workshop/microblog-backend"
           command = ["sh", "-c", "python manage.py migrate"]
           env_from {
             secret_ref {
@@ -297,7 +296,7 @@ resource "kubernetes_ingress" "microblog-backend" {
     namespace = "cloudbees-core"
     annotations = {
       "kubernetes.io/ingress.class" = "nginx"
-      "cert-manager.io/cluster-issuer": "letsencrypt-prod"
+      "cert-manager.io/cluster-issuer" : "letsencrypt-prod"
     }
   }
 
@@ -318,7 +317,7 @@ resource "kubernetes_ingress" "microblog-backend" {
 
     tls {
       secret_name = "backend-tls"
-      hosts = ["backend.${var.domain}"]
+      hosts       = ["backend.${var.domain}"]
     }
   }
 }
