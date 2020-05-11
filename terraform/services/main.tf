@@ -164,6 +164,7 @@ resource "kubernetes_deployment" "postgresdb" {
       app = "postgresdb"
     }
   }
+  
 
   spec {
     replicas = 1
@@ -194,6 +195,10 @@ resource "kubernetes_deployment" "postgresdb" {
       }
     }
   }
+
+  depends_on = [
+    kubernetes_secret.postgresdb
+  ]
 }
 
 resource "kubernetes_service" "postgresdb" {
@@ -263,6 +268,9 @@ resource "kubernetes_deployment" "microblog-backend" {
       }
     }
   }
+  depends_on = [
+    kubernetes_secret.postgresdb
+  ]
 }
 
 resource "kubernetes_service" "microblog-backend" {
