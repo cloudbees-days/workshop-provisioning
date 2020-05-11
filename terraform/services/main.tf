@@ -151,7 +151,7 @@ resource "kubernetes_secret" "postgresdb" {
     POSTGRES_PASSWORD = random_string.db_password.result
     POSTGRES_DB       = random_string.db_name.result
     POSTGRES_PORT     = 5432
-    POSTGRES_SERVICE  = kubernetes_service.postgresdb.metadata[0].name
+    POSTGRES_SERVICE  = "postgresdb"
   }
 }
 
