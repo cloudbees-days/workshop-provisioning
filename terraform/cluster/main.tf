@@ -20,7 +20,7 @@ variable "cluster_name" {
 
 terraform {
   backend "gcs" {
-    bucket  = "ld-cluster-state"
+    bucket  = "cbws1-cluster"
     prefix  = "terraform/state/cluster"
   }
 }

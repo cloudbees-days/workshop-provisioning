@@ -4,7 +4,7 @@ variable "domain" {
 
 terraform {
   backend "gcs" {
-    bucket = "ld-cluster-state"
+    bucket = "cbws1-cluster"
     prefix = "terraform/state/services"
   }
 }
