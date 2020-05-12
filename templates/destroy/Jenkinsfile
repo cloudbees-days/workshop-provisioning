@@ -1,0 +1,27 @@
+pipeline {
+   agent any
+   environment {
+      TF_VAR_bucket = "${bucket}"
+      TF_VAR_project = "${project}"
+      TF_VAR_region = "${region}"
+      TF_VAR_cluster_name = "${clusterName}"
+   }
+   stages {
+      stage('Checkout code') {
+         steps {
+            git branch: 'master',
+            credentialsId: "${githubCredentialId}",
+            url: 'https://github.com/cloudbees-days/workshop-provisioning'
+         }
+      }
+      stage('Destroy cluster') {
+         steps {
+            dir('terraform/cluster') {
+               sh "sed -i 's/my_bucket/'${bucket}'/' main.tf"
+               sh 'terraform init'
+               sh 'terraform destroy -auto-approve'
+            }
+         }
+      }
+   }
+}

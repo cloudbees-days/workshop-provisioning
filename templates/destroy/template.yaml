@@ -1,0 +1,20 @@
+version: 1
+type: destroy-template
+name: Destroy workshop environment
+description: Destroy your workshop environment
+parameters:
+  - name: bucket
+    type: string
+    displayName: GCS Bucket
+  - name: project
+    type: string
+    displayName: GCP Project
+  - name: region
+    type: string
+    displayName: GCP Region
+  - name: clusterName
+    type: string
+    displayName: Cluster Name
+  - name: githubCredentialId
+    displayName: GitHub Credential ID
+    type: CREDENTIALS

@@ -1,7 +1,7 @@
 version: 1
 type: pipeline-template
 name: Provision workshop environment
-description: Test, Build and Deploy for Microblog Backend application
+description: Provision your workshop environment
 parameters:
   - name: bucket
     type: string
@@ -21,6 +21,9 @@ parameters:
   - name: clusterName
     type: string
     displayName: Cluster Name
+  - name: email
+    type: string
+    displayName: Email address
   - name: githubCredentialId
     displayName: GitHub Credential ID
     type: CREDENTIALS
