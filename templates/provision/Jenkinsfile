@@ -10,12 +10,8 @@ pipeline {
       EMAIL = "${email}"
    }
    stages {
-      try {
-         stage('Setup bucket') {
-            sh "gsutil mb gs://${bucket}/"
-         }
-      } catch (Exception e) {
-         echo "Bucket already exists"
+      stage('Setup bucket') {
+         sh "gsutil mb gs://${bucket}/"
       }
       stage('Setup cluster') {
          steps {
