@@ -53,14 +53,14 @@ pipeline {
       }
       stage('Setup extra') {
          steps {
-            sh '''
+            sh """
                export KUBECONFIG=terraform/kubeconfig
                kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.3/cert-manager-legacy.yaml
                sleep 30
-               sed -i 's/REPLACE_EMAIL/'$EMAIL'/' ./k8s/cluster-issuers.yml
+               sed -i 's/REPLACE_EMAIL/'${EMAIL}'/' ./k8s/cluster-issuers.yml
                kubectl apply -f k8s/cluster-issuers.yml
                kubectl apply -f k8s/cjoc-agents.yaml -n cloudbees-core
-            '''
+            """
          }
       }
    }
