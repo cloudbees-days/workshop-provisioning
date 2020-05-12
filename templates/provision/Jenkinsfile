@@ -19,7 +19,9 @@ pipeline {
       }
       stage('Setup bucket') {
          steps {
-            sh "gsutil mb gs://${bucket}/"
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+               sh "gsutil mb gs://${bucket}/"
+            }
          }
       }
       stage('Setup cluster') {
