@@ -32,8 +32,3 @@ multibranch:
       credentialsId: ${githubCredentialId}
       repoOwner: cloudbees-days
       repository: workshop-provisioning
-      traits:
-        - $class: WildcardSCMHeadFilterTrait
-          includes: master
-        - $class: BranchDiscoveryTrait
-          strategyId: 1
