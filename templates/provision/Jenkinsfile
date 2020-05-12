@@ -1,13 +1,13 @@
 pipeline {
    agent any
    environment {
-      TF_VAR_bucket = ${bucket}
-      TF_VAR_project = ${project}
-      TF_VAR_domain_zone = ${domainZone}
-      TF_VAR_domain = ${domain}
-      TF_VAR_region = ${region}
-      TF_VAR_cluster_name = ${clusterName}
-      EMAIL = ${email}
+      TF_VAR_bucket = "${bucket}"
+      TF_VAR_project = "${project}"
+      TF_VAR_domain_zone = "${domainZone}"
+      TF_VAR_domain = "${domain}"
+      TF_VAR_region = "${region}"
+      TF_VAR_cluster_name = "${clusterName}"
+      EMAIL = "${email}"
    }
    stages {
       stage('Setup cluster') {
