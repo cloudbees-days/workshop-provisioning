@@ -1,5 +1,5 @@
 version: 1
-type: destroy-template
+type: pipeline-template
 name: Destroy workshop environment
 description: Destroy your workshop environment
 parameters:
