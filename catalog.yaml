@@ -1,0 +1,4 @@
+name: provisioningCatalog
+displayName: CloudBees Days Workshop Provisioning Catalog
+version: 1
+type: pipeline-template-catalog

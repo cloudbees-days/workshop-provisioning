@@ -12,7 +12,7 @@ variable "cluster_name" {
 
 terraform {
   backend "gcs" {
-    bucket  = "cbws1-cluster"
+    bucket  = "my_bucket"
     prefix  = "terraform/state/cluster"
   }
 }

@@ -1,0 +1,34 @@
+version: 1
+type: pipeline-template
+name: Provision workshop environment
+templateType: MULTIBRANCH
+description: Test, Build and Deploy for Microblog Backend application
+parameters:
+  - name: bucket
+    type: string
+    displayName: GCS Bucket
+  - name: project
+    type: string
+    displayName: GCP Project
+  - name: domainZone
+    type: string
+    displayName: Domain Zone
+  - name: domain
+    type: string
+    displayName: Base domain
+  - name: region
+    type: string
+    displayName: GCP Region
+  - name: clusterName
+    type: string
+    displayName: Cluster Name
+  - name: githubCredentialId
+    displayName: GitHub Credential ID
+    type: CREDENTIALS
+multibranch:
+  branchSource:
+    github:
+      id: provision
+      credentialsId: ${githubCredentialId}
+      repoOwner: cloudbees-days
+      repository: workshop-provisioning

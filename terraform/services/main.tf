@@ -4,7 +4,7 @@ variable "domain" {
 
 terraform {
   backend "gcs" {
-    bucket = "cbws1-cluster"
+    bucket = "my_bucket"
     prefix = "terraform/state/services"
   }
 }
@@ -321,16 +321,3 @@ resource "kubernetes_ingress" "microblog-backend" {
     }
   }
 }
-
-
-# resource "helm_release" "nexus" {
-#   name      = "nexus"
-#   chart     = "stable/sonatype-nexus"
-#   namespace = "nexus"
-
-#   values = [
-#     "${file("./../../helm/nexus.yml")}"
-#   ]
-# }
-
-
