@@ -35,3 +35,5 @@ multibranch:
       traits:
         - $class: WildcardSCMHeadFilterTrait
           includes: master
+        - $class: BranchDiscoveryTrait
+          strategyId: 1
