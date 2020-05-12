@@ -1,7 +1,6 @@
 version: 1
 type: pipeline-template
 name: Provision workshop environment
-templateType: MULTIBRANCH
 description: Test, Build and Deploy for Microblog Backend application
 parameters:
   - name: bucket
