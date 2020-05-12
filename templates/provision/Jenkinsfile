@@ -11,7 +11,9 @@ pipeline {
    }
    stages {
       stage('Setup bucket') {
-         sh "gsutil mb gs://${bucket}/"
+         steps {
+            sh "gsutil mb gs://${bucket}/"
+         }
       }
       stage('Setup cluster') {
          steps {
