@@ -10,6 +10,13 @@ pipeline {
       EMAIL = "${email}"
    }
    stages {
+      stage('Checkout code') {
+         steps {
+            git branch: 'master',
+            credentialsId: "${githubCredentialId}",
+            url: 'https://github.com/cloudbees-days/workshop-provisioning'
+         }
+      }
       stage('Setup bucket') {
          steps {
             sh "gsutil mb gs://${bucket}/"

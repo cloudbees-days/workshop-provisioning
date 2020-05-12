@@ -25,10 +25,3 @@ parameters:
   - name: githubCredentialId
     displayName: GitHub Credential ID
     type: CREDENTIALS
-multibranch:
-  branchSource:
-    github:
-      id: provision
-      credentialsId: ${githubCredentialId}
-      repoOwner: cloudbees-days
-      repository: workshop-provisioning
