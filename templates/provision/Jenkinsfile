@@ -10,6 +10,13 @@ pipeline {
       EMAIL = "${email}"
    }
    stages {
+      try {
+         stage('Setup bucket') {
+            sh "gsutil mb gs://${bucket}/"
+         }
+      } catch (Exception e) {
+         echo "Bucket already exists"
+      }
       stage('Setup cluster') {
          steps {
             dir('terraform/cluster') {
