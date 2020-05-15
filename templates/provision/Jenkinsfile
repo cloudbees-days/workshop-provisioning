@@ -10,6 +10,9 @@ pipeline {
       TF_VAR_node_count = "${initialNodeCount}"
       TF_VAR_min_node_count = "${minNodeCount}"
       TF_VAR_max_node_count = "${maxNodeCount}"
+      TF_VAR_oc_memory = "${ocMemory}"
+      TF_VAR_oc_cpu = "${ocCpu}"
+      TF_VAR_machine_type = "${machineType}"
       CLUSTER_TYPE = "${clusterType}"
       EMAIL = "${email}"
    }

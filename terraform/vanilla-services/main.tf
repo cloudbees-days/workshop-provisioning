@@ -2,6 +2,16 @@ variable "domain" {
   type = string
 }
 
+variable "oc_memory" {
+  type    = string
+  default = "8G"
+}
+
+variable "oc_cpu" {
+  type    = string
+  default = "2"
+}
+
 terraform {
   backend "gcs" {
     bucket = "my_bucket"
@@ -96,5 +106,25 @@ resource "helm_release" "core" {
   set {
     name  = "OperationsCenter.Ingress.tls.Host"
     value = "core.${var.domain}"
+  }
+  
+  set {
+    name  = "OperationsCenter.Ingress.tls.Enable"
+    value = "true"
+  }
+
+  set {
+    name = "OperationsCenter.Ingress.Annotations.cert-manager.io/cluster-issuer"
+    value = "letsencrypt-prod"
+  }
+
+  set {
+    name  = "OperationsCenter.Cpu"
+    value = var.oc_cpu
+  }
+
+  set {
+    name  = "OperationsCenter.Memory"
+    value = var.oc_memory
   }
 }

@@ -10,6 +10,11 @@ variable "cluster_name" {
   type = string
 }
 
+variable "machine_type" {
+  type = string
+  default = "n1-standard-8"
+}
+
 variable "node_count" {
   type    = number
   default = 1
@@ -80,7 +85,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
   node_config {
     preemptible  = false
-    machine_type = "n1-standard-8"
+    machine_type = var.machine_type
 
     metadata = {
       disable-legacy-endpoints = "true"
