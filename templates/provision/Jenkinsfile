@@ -10,6 +10,7 @@ pipeline {
       TF_VAR_node_count = "${initialNodeCount}"
       TF_VAR_min_node_count = "${minNodeCount}"
       TF_VAR_max_node_count = "${maxNodeCount}"
+      CLUSTER_TYPE = "${clusterType}"
       EMAIL = "${email}"
    }
    stages {
@@ -36,9 +37,24 @@ pipeline {
             }
          }
       }
-      stage('Setup services') {
+      stage('Setup workshop services') {
+         when {
+            environment name: "CLUSTER_TYPE", value: "workshop"
+         }
          steps {
             dir('terraform/services') {
+               sh "sed -i 's/my_bucket/'${bucket}'/' main.tf"
+               sh 'terraform init'
+               sh 'terraform apply -auto-approve'
+            }
+         }
+      }
+      stage('Setup vanilla services') {
+         when {
+            environment name: "CLUSTER_TYPE", value: "vanilla"
+         }
+         steps {
+            dir('terraform/vanilla-services') {
                sh "sed -i 's/my_bucket/'${bucket}'/' main.tf"
                sh 'terraform init'
                sh 'terraform apply -auto-approve'
