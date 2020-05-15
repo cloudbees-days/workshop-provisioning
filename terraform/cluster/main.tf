@@ -56,11 +56,11 @@ resource "google_container_node_pool" "primary_nodes" {
   name       = "main-node-pool"
   location   = "us-central1-a"
   cluster    = google_container_cluster.primary.name
-  node_count = 3
+  node_count = 5
 
   autoscaling {
-    min_node_count = 1
-    max_node_count = 10
+    min_node_count = 5
+    max_node_count = 50
   }
 
   node_config {
