@@ -113,8 +113,8 @@ resource "helm_release" "core" {
     value = "true"
   }
 
-  set {
-    name = "OperationsCenter.Ingress.Annotations.cert-manager.io/cluster-issuer"
+  set_string {
+    name = "OperationsCenter.Ingress.Annotations.cert-manager\\.io/cluster-issuer"
     value = "letsencrypt-prod"
   }
 
