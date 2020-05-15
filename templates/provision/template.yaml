@@ -21,6 +21,15 @@ parameters:
   - name: clusterName
     type: string
     displayName: Cluster Name
+  - name: initialNodeCount
+    type: string
+    displayName: Initial Node Count
+  - name: minNodeCount
+    type: string
+    displayName: Minimum Node Count
+  - name: maxNodeCount
+    type: string
+    displayName: Maximum Node Count
   - name: email
     type: string
     displayName: Email address

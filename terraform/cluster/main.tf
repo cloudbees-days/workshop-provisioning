@@ -10,6 +10,21 @@ variable "cluster_name" {
   type = string
 }
 
+variable "node_count" {
+  type = number
+  default = 1
+}
+
+variable "min_node_count" {
+  type = number
+  default = 1
+}
+
+variable "max_node_count" {
+  type = number
+  default = 10
+}
+
 terraform {
   backend "gcs" {
     bucket  = "my_bucket"
@@ -56,11 +71,11 @@ resource "google_container_node_pool" "primary_nodes" {
   name       = "main-node-pool"
   location   = "us-central1-a"
   cluster    = google_container_cluster.primary.name
-  node_count = 5
+  node_count = var.node_count
 
   autoscaling {
-    min_node_count = 5
-    max_node_count = 50
+    min_node_count = var.min_node_count
+    max_node_count = var.max_node_count
   }
 
   node_config {
