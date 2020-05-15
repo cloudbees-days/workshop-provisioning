@@ -11,24 +11,24 @@ variable "cluster_name" {
 }
 
 variable "node_count" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "min_node_count" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "max_node_count" {
-  type = number
+  type    = number
   default = 10
 }
 
 terraform {
   backend "gcs" {
-    bucket  = "my_bucket"
-    prefix  = "terraform/state/cluster"
+    bucket = "my_bucket"
+    prefix = "terraform/state/cluster"
   }
 }
 

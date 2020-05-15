@@ -17,8 +17,8 @@ variable "region" {
 
 terraform {
   backend "gcs" {
-    bucket  = "my_bucket"
-    prefix  = "terraform/state/dns"
+    bucket = "my_bucket"
+    prefix = "terraform/state/dns"
   }
 }
 

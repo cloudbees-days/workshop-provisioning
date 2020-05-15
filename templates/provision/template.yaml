@@ -21,6 +21,13 @@ parameters:
   - name: clusterName
     type: string
     displayName: Cluster Name
+  - name: clusterType
+    type: string
+    displayName: Cluster Type
+    defaultValue: workshop
+    allowedValues:
+      - workshop
+      - vanilla
   - name: initialNodeCount
     type: string
     displayName: Initial Node Count
