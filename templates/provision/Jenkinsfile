@@ -63,6 +63,14 @@ pipeline {
                sed -i 's/REPLACE_EMAIL/'${EMAIL}'/' ./k8s/cluster-issuers.yml
                kubectl apply -f k8s/cluster-issuers.yml
                kubectl apply -f k8s/cjoc-agents.yaml -n cloudbees-core
+               gcloud iam service-accounts add-iam-policy-binding \
+                  --role roles/iam.workloadIdentityUser \
+                  --member "serviceAccount:cb-days-workshop.svc.id.goog[cloudbees-core/jenkins]" \
+               workshop-gcr@cb-days-workshop.iam.gserviceaccount.com
+               kubectl annotate serviceaccount \
+                  --namespace cloudbees-core \
+                  jenkins \
+                  iam.gke.io/gcp-service-account=workshop-gcr@cb-days-workshop.iam.gserviceaccount.com
             """
          }
       }
