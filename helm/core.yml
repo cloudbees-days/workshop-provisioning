@@ -200,7 +200,7 @@ Master:
   # Docker image inserted in Operations Center automatically
   Image:
     # dockerImage: cloudbees/cloudbees-core-mm:2.204.2.2
-    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:d89c9329527065fd2befa9c894b3de5f3edb9f7e73ef9cf564e216e344fff15a
+    dockerImage: gcr.io/cb-days-workshop/cb-core-mm-workshop@sha256:d94ad844497b66c61edcf397b481fb8f2c16aeabaaa1e7ca551e553bcfc894bc
     dockerPullPolicy: Always
   # Additional Java options to pass to managed masters. For example, setting up a JMX port
   JavaOpts:
