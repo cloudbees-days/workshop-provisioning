@@ -36,7 +36,7 @@ parameters:
     type: string
     displayName: Operations Center CPU
     defaultValue: "2"
-  - name: machine_type
+  - name: machineType
     type: string
     displayName: Machine Type
     defaultValue: "n1-standard-8"
