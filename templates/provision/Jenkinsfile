@@ -10,9 +10,13 @@ pipeline {
       TF_VAR_node_count = "${initialNodeCount}"
       TF_VAR_min_node_count = "${minNodeCount}"
       TF_VAR_max_node_count = "${maxNodeCount}"
+      TF_VAR_secondary_node_count = "${secondaryInitialNodeCount}"
+      TF_VAR_secondary_min_node_count = "${secondaryMinNodeCount}"
+      TF_VAR_secondary_max_node_count = "${secondaryMaxNodeCount}"
       TF_VAR_oc_memory = "${ocMemory}"
       TF_VAR_oc_cpu = "${ocCpu}"
       TF_VAR_machine_type = "${machineType}"
+      TF_VAR_secondary_machine_type = "${secondaryMachineType}"
       CLUSTER_TYPE = "${clusterType}"
       EMAIL = "${email}"
    }
@@ -36,6 +40,8 @@ pipeline {
             dir('terraform/cluster') {
                sh "sed -i 's/my_bucket/'${bucket}'/' main.tf"
                sh 'terraform init'
+               sh 'terraform plan'
+               input 'Proceed?'
                sh 'terraform apply -auto-approve'
             }
          }
@@ -48,6 +54,8 @@ pipeline {
             dir('terraform/services') {
                sh "sed -i 's/my_bucket/'${bucket}'/' main.tf"
                sh 'terraform init'
+               sh 'terraform plan'
+               input 'Proceed?'
                sh 'terraform apply -auto-approve'
             }
          }
@@ -60,6 +68,8 @@ pipeline {
             dir('terraform/vanilla-services') {
                sh "sed -i 's/my_bucket/'${bucket}'/' main.tf"
                sh 'terraform init'
+               sh 'terraform plan'
+               input 'Proceed?'
                sh 'terraform apply -auto-approve'
             }
          }

@@ -14,7 +14,7 @@ variable "oc_cpu" {
 
 terraform {
   backend "gcs" {
-    bucket = "my_bucket"
+    bucket = "cb-connect-workshop-bucket"
     prefix = "terraform/state/services"
   }
 }

@@ -30,6 +30,26 @@ variable "max_node_count" {
   default = 10
 }
 
+variable "secondary_machine_type" {
+  type = string
+  default = "n1-standard-8"
+}
+
+variable "secondary_node_count" {
+  type    = number
+  default = 1
+}
+
+variable "secondary_min_node_count" {
+  type    = number
+  default = 1
+}
+
+variable "secondary_max_node_count" {
+  type    = number
+  default = 10
+}
+
 terraform {
   backend "gcs" {
     bucket = "my_bucket"
@@ -86,6 +106,31 @@ resource "google_container_node_pool" "primary_nodes" {
   node_config {
     preemptible  = false
     machine_type = var.machine_type
+
+    metadata = {
+      disable-legacy-endpoints = "true"
+    }
+
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+  }
+}
+
+resource "google_container_node_pool" "secondary_nodes" {
+  name       = "secondary-node-pool"
+  location   = "us-central1-a"
+  cluster    = google_container_cluster.primary.name
+  node_count = var.secondary_node_count
+
+  autoscaling {
+    min_node_count = var.secondary_min_node_count
+    max_node_count = var.secondary_max_node_count
+  }
+
+  node_config {
+    preemptible  = false
+    machine_type = var.secondary_machine_type
 
     metadata = {
       disable-legacy-endpoints = "true"
