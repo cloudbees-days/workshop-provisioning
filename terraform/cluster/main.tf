@@ -86,6 +86,14 @@ resource "google_container_cluster" "primary" {
     identity_namespace = "${var.project}.svc.id.goog"
   }
 
+  maintenance_policy {
+  recurring_window {
+    start_time = "2020-05-15T04:00:00Z"
+    end_time   = "2020-05-16T04:00:00Z"
+    recurrence = "FREQ=WEEKLY;BYDAY=SA,SU"
+  }
+}
+
   master_auth {
     username = random_id.username.hex
     password = random_id.password.hex
